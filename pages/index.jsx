@@ -6,12 +6,11 @@ import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useBalance, useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
 import { useAuthRequestChallengeEvm } from "@moralisweb3/next"
-import { fetchBalance } from '@wagmi/core'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { connectAsync } = useConnect();
+    const { connectAsync } = useConnect();
     const { disconnectAsync } = useDisconnect();
     const { isConnected } = useAccount();
     const { signMessageAsync } = useSignMessage();
@@ -34,10 +33,6 @@ export default function Home() {
 
       const signature = await signMessageAsync({ message });
 
-      const balance = await fetchBalance({
-        address: account,
-      })
-
       const { url } = await signIn("moralis-auth", {
         message,
         signature,
@@ -48,7 +43,7 @@ export default function Home() {
       push(url);
       //redirection by push to avoid refreshing
     };
-
+    
     return (
       <>
         <Head>
