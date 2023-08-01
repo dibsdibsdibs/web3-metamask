@@ -7,18 +7,19 @@ const inter = Inter({ subsets: ['latin'] })
 
 function User({ user }) {
 
+    // get balance
     const balance = useBalance({
         address: user.address,
     })
 
-    console.log(balance.data)
-
     // get user session and display sign out button when session is available
     return (
-        <div className={`${styles.sesh} ${inter.className}`}>
-            <h1>USER SESSION:</h1>
-            <pre>{JSON.stringify(user, null, 2)}</pre>
-            <p>Balance: {balance.data.formatted}</p>
+        <div className={`${styles.user} ${inter.className}`}>
+            <h1>CURRENT BALANCE: {balance.data.formatted}</h1>
+            <div>
+                <h3>USER SESSION:</h3>
+                <pre>{JSON.stringify(user, null, 2)}</pre>
+            </div>
             <div className={styles.dispButton}>
                 <button onClick={() => signOut({ redirect: "/signin" })}>Sign Out</button>
             </div>
@@ -32,10 +33,10 @@ export async function getServerSideProps(context) {
     // redirect if not authenticated
     if (!session) {
         return {
-        redirect: {
-            destination: "/",
-            permanent: false,
-        },
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
         };
     }
 
