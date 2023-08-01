@@ -15,10 +15,16 @@ function User({ user }) {
     // get user session and display sign out button when session is available
     return (
         <div className={`${styles.user} ${inter.className}`}>
-            <h1>CURRENT BALANCE: {balance.data.formatted}</h1>
+            <h1>USER DETAILS</h1>
             <div>
-                <h3>USER SESSION:</h3>
-                <pre>{JSON.stringify(user, null, 2)}</pre>
+                <div className={styles.details}>
+                    <h3>ADDRESS</h3>
+                    <p>{user.address}</p>  
+                </div>
+                <div className={styles.details}>
+                    <h3>CURRENT BALANCE</h3>
+                    <p>{balance.data.formatted}</p>
+                </div>
             </div>
             <div className={styles.dispButton}>
                 <button onClick={() => signOut({ redirect: "/signin" })}>Sign Out</button>
